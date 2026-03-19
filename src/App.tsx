@@ -1,121 +1,120 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useMemo, useRef, useState } from "react";
+import "./App.css";
+import { ResultForm } from "./components/ResultForm";
+import { ResultPreview } from "./components/ResultPreview";
+import { createDefaultRatings, createEmptyMarks } from "./config/template";
+import type { StudentInfo, SubjectId } from "./types/result";
+import { computeResults } from "./utils/calculations";
+import { clampScore } from "./utils/grading";
+import { exportElementsToPdf } from "./utils/pdfExport";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [student, setStudent] = useState<StudentInfo>({
+    name: "AHD ABIAVI CHLOE",
+    term: "III",
+    sex: "Female",
+    className: "Four",
+    age: "9 years",
+    schoolOpen: 55,
+    present: 53,
+    absent: 2,
+    positionInClass: "12th",
+    nextTermBegins: "01/09/25",
+  });
+  const [marks, setMarks] = useState(createEmptyMarks);
+  const [ratings, setRatings] = useState(createDefaultRatings);
+  const [isExporting, setIsExporting] = useState(false);
+
+  const frontPageRef = useRef<HTMLDivElement>(null);
+  const backPageRef = useRef<HTMLDivElement>(null);
+
+  const computed = useMemo(() => computeResults(marks), [marks]);
+
+  function handleStudentChange(
+    field: keyof StudentInfo,
+    value: string | number,
+  ): void {
+    setStudent((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }
+
+  function handleMarkChange(
+    subjectId: SubjectId,
+    field: "test" | "exam",
+    value: number,
+  ): void {
+    setMarks((prev) => {
+      const subject = prev[subjectId];
+      const max = field === "test" ? 30 : 70;
+
+      return {
+        ...prev,
+        [subjectId]: {
+          ...subject,
+          [field]: clampScore(value, 0, max),
+        },
+      };
+    });
+  }
+
+  function handleRatingChange(itemId: string, value: number): void {
+    setRatings((prev) => ({
+      ...prev,
+      [itemId]: clampScore(value, 1, 5),
+    }));
+  }
+
+  async function handleExport(): Promise<void> {
+    if (!frontPageRef.current || !backPageRef.current) {
+      return;
+    }
+
+    try {
+      setIsExporting(true);
+      const safeName = student.name
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9-]/g, "");
+      const fileName =
+        safeName.length > 0
+          ? `${safeName}-result-sheet.pdf`
+          : "result-sheet.pdf";
+
+      await exportElementsToPdf(
+        [frontPageRef.current, backPageRef.current],
+        fileName,
+      );
+    } finally {
+      setIsExporting(false);
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className="app-shell">
+      <ResultForm
+        student={student}
+        marks={marks}
+        ratings={ratings}
+        computed={computed}
+        isExporting={isExporting}
+        onStudentChange={handleStudentChange}
+        onMarkChange={handleMarkChange}
+        onRatingChange={handleRatingChange}
+        onExport={handleExport}
+      />
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <ResultPreview
+        student={student}
+        ratings={ratings}
+        computed={computed}
+        frontPageRef={frontPageRef}
+        backPageRef={backPageRef}
+      />
+    </main>
+  );
 }
 
-export default App
+export default App;
