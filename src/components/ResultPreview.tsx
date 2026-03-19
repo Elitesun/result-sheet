@@ -32,7 +32,13 @@ export function ResultPreview({
       <div className="result-page front-page" ref={frontPageRef}>
         <div className="page-overlay front-overlay">
           <header className="sheet-header">
-            <img src="/logo.webp" alt="School logo" className="sheet-logo" />
+            <img
+              src="/logo.webp"
+              alt="School logo"
+              className="sheet-logo"
+              loading="eager"
+              decoding="sync"
+            />
             <div>
               <h1>{RESULT_TEMPLATE.schoolName}</h1>
               <p>{RESULT_TEMPLATE.schoolAddress}</p>

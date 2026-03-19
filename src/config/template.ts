@@ -9,7 +9,7 @@ export const RESULT_TEMPLATE: ResultTemplate = {
   schoolName: "GOD IS ALIVE ACADEMY",
   schoolAddress: "04 BP 334 Lome 04 - Togo",
   schoolContact: "Cel: + 96 97 93 57 | Email: godisaliveacademyegaa@gmail.com",
-  academicYear: "2024 - 2025",
+  academicYear: "2025 - 2026",
   motto: "HUMILITY - WISDOM - SUCCESS",
   subjects: [
     { id: "mathematics", name: "Mathematics", maxTest: 30, maxExam: 70 },

@@ -1,6 +1,29 @@
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
+async function ensureImagesReady(elements: HTMLElement[]): Promise<void> {
+  const imageElements = elements.flatMap((element) =>
+    Array.from(element.querySelectorAll("img")),
+  );
+
+  await Promise.all(
+    imageElements.map(async (image) => {
+      if (image.complete && image.naturalWidth > 0) {
+        if (typeof image.decode === "function") {
+          await image.decode().catch(() => undefined);
+        }
+        return;
+      }
+
+      await new Promise<void>((resolve) => {
+        const onReady = () => resolve();
+        image.addEventListener("load", onReady, { once: true });
+        image.addEventListener("error", onReady, { once: true });
+      });
+    }),
+  );
+}
+
 export async function exportElementsToPdf(
   elements: HTMLElement[],
   fileName: string,
@@ -19,6 +42,8 @@ export async function exportElementsToPdf(
   document.documentElement.classList.add("pdf-export-mode");
 
   try {
+    await ensureImagesReady(elements);
+
     for (let index = 0; index < elements.length; index += 1) {
       const element = elements[index];
       const canvas = await html2canvas(element, {
@@ -34,7 +59,10 @@ export async function exportElementsToPdf(
 
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-      const scale = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+      const scale = Math.min(
+        pageWidth / canvas.width,
+        pageHeight / canvas.height,
+      );
       const targetWidth = canvas.width * scale;
       const targetHeight = canvas.height * scale;
       const offsetX = (pageWidth - targetWidth) / 2;
