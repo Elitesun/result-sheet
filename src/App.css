@@ -196,31 +196,47 @@ button:disabled {
     url("/result-back.jpeg");
 }
 
+/* Use template photos for live preview only; hide them during PDF capture. */
+.pdf-export-mode .front-page,
+.pdf-export-mode .back-page {
+  background-image: none;
+}
+
 .page-overlay {
   height: 100%;
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  padding: 2.2% 3%;
+  padding: 2% 2.6%;
+}
+
+.front-overlay {
+  grid-template-rows: auto auto auto auto;
+  align-content: start;
+  row-gap: 0.26rem;
+}
+
+.back-overlay {
+  grid-template-rows: auto 1fr auto;
+  row-gap: 0.45rem;
 }
 
 .sheet-header {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 0.6rem;
+  gap: 0.78rem;
   border-bottom: 1px solid #000000;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.46rem;
   align-items: center;
 }
 
 .sheet-logo {
-  width: 54px;
-  height: 54px;
+  width: 74px;
+  height: 74px;
   object-fit: contain;
 }
 
 .sheet-header h1 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
   letter-spacing: 0.02em;
   text-align: center;
 }
@@ -228,7 +244,7 @@ button:disabled {
 .sheet-header p {
   margin: 0;
   text-align: center;
-  font-size: 0.54rem;
+  font-size: 0.68rem;
 }
 
 .sheet-motto {
@@ -238,81 +254,239 @@ button:disabled {
 .academic-year {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  font-size: 0.54rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
 }
 
 .student-meta {
-  padding: 0.45rem 0;
+  padding: 0.62rem 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.2rem 0.8rem;
+  gap: 0.3rem 0.95rem;
 }
 
-.student-meta p,
+.student-meta p {
+  margin: 0;
+  padding-block: 0.1rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
 .summary-row p {
   margin: 0;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
 }
-
+/* distance bettween summary and result */
 .subjects-section h3 {
-  margin: 0 0 0.25rem;
-  font-size: 0.7rem;
+  margin: 2rem 0 0.5rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
 }
 
 .sheet-table {
-  font-size: 0.62rem;
+  font-size: 0.72rem;
 }
 
 .sheet-table th,
 .sheet-table td {
-  padding: 0.18rem 0.2rem;
+  padding: 0.31rem 0.34rem;
+  line-height: 1.38;
+}
+
+.subjects-table {
+  font-size: 0.82rem;
+}
+
+.subjects-table th {
+  font-size: 0.86rem;
+}
+
+.subjects-table th,
+.subjects-table td {
+  padding-block: 0.5rem;
+  line-height: 1.5;
+}
+
+.subject-name {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.subjects-table .spacer-row td {
+  height: 1.2rem;
+  padding: 0;
+  background: #ffffff;
 }
 
 .summary-row {
-  margin-top: 0.35rem;
+  margin-top: 12rem;
   border-top: 1px solid #000000;
-  padding-top: 0.35rem;
+  padding-top: 0.34rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.report-footer {
+  grid-template-columns: 1fr;
+}
+
+.meta-inline {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.22rem 0.8rem;
+  gap: 0.36rem 1rem;
+}
+
+.meta-inline p {
+  margin: 0;
+  padding-block: 0.06rem;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.meta-inline strong {
+  letter-spacing: 0.02em;
+}
+
+.remarks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.82rem;
+}
+
+.remark-box {
+  display: grid;
+  gap: 0.28rem;
+}
+
+.remark-label {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.handwriting-space {
+  min-height: 1.15rem;
+  border-bottom: 1px solid #000000;
+}
+
+.signatures-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.82rem;
+}
+
+.signature-label {
+  margin: 0 0 0.28rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.signature-line {
+  min-height: 0.96rem;
+  border-bottom: 1px solid #000000;
+}
+
+.next-term-line {
+  margin: 0.2rem 0 0;
+  font-size: 0.84rem;
+  text-transform: uppercase;
+}
+
+.next-term-line strong {
+  letter-spacing: 0.02em;
 }
 
 .back-title {
-  margin: 0 0 0.35rem;
-  font-size: 0.95rem;
+  margin: 0 0 0.24rem;
+  font-size: 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.025em;
   text-align: center;
 }
 
 .ratings-table th,
 .ratings-table td {
   font-size: 0.66rem;
+  padding: 0.24rem 0.26rem;
+}
+
+.ratings-table {
+  width: 95%;
+  margin-inline: auto;
+}
+
+.ratings-table tbody td:first-child {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 .center-cell {
   text-align: center;
   font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1;
 }
 
 .summary-blocks {
-  margin-top: 0.5rem;
+  margin-top: 0.32rem;
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  gap: 0.6rem;
+  gap: 0.7rem;
 }
 
 .summary-blocks h3 {
-  margin: 0 0 0.25rem;
-  font-size: 0.74rem;
+  margin: 0 0 0.3rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
 }
 
 .compact-table th,
 .compact-table td {
-  font-size: 0.63rem;
+  font-size: 0.7rem;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .app-shell {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+
+  .form-panel,
+  .preview-header {
+    display: none;
+  }
+
+  .result-page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .academic-year {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+  }
 }
 
 @media (max-width: 1240px) {
@@ -334,7 +508,9 @@ button:disabled {
   .two-columns,
   .ratings-grid,
   .student-meta,
-  .summary-row,
+  .meta-inline,
+  .remarks-grid,
+  .signatures-grid,
   .summary-blocks {
     grid-template-columns: 1fr;
   }

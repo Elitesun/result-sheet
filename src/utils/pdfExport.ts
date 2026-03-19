@@ -1,8 +1,6 @@
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
-const MM_PER_PX = 0.2645833333;
-
 export async function exportElementsToPdf(
   elements: HTMLElement[],
   fileName: string,
@@ -18,41 +16,44 @@ export async function exportElementsToPdf(
     compress: true,
   });
 
-  for (let index = 0; index < elements.length; index += 1) {
-    const element = elements[index];
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: "#ffffff",
-    });
+  document.documentElement.classList.add("pdf-export-mode");
 
-    const imageData = canvas.toDataURL("image/jpeg", 0.95);
-    const imageWidth = canvas.width * MM_PER_PX;
-    const imageHeight = canvas.height * MM_PER_PX;
+  try {
+    for (let index = 0; index < elements.length; index += 1) {
+      const element = elements[index];
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+      });
 
-    if (index > 0) {
-      pdf.addPage();
+      const imageData = canvas.toDataURL("image/jpeg", 0.95);
+      if (index > 0) {
+        pdf.addPage();
+      }
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const scale = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+      const targetWidth = canvas.width * scale;
+      const targetHeight = canvas.height * scale;
+      const offsetX = (pageWidth - targetWidth) / 2;
+      const offsetY = (pageHeight - targetHeight) / 2;
+
+      pdf.addImage(
+        imageData,
+        "JPEG",
+        offsetX,
+        offsetY,
+        targetWidth,
+        targetHeight,
+        undefined,
+        "FAST",
+      );
     }
 
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const scale = Math.min(pageWidth / imageWidth, pageHeight / imageHeight);
-    const targetWidth = imageWidth * scale;
-    const targetHeight = imageHeight * scale;
-    const x = (pageWidth - targetWidth) / 2;
-    const y = (pageHeight - targetHeight) / 2;
-
-    pdf.addImage(
-      imageData,
-      "JPEG",
-      x,
-      y,
-      targetWidth,
-      targetHeight,
-      undefined,
-      "FAST",
-    );
+    pdf.save(fileName);
+  } finally {
+    document.documentElement.classList.remove("pdf-export-mode");
   }
-
-  pdf.save(fileName);
 }

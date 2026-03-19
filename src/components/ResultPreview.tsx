@@ -30,7 +30,7 @@ export function ResultPreview({
       </div>
 
       <div className="result-page front-page" ref={frontPageRef}>
-        <div className="page-overlay">
+        <div className="page-overlay front-overlay">
           <header className="sheet-header">
             <img src="/logo.webp" alt="School logo" className="sheet-logo" />
             <div>
@@ -73,7 +73,7 @@ export function ResultPreview({
 
           <section className="subjects-section">
             <h3>Performance In Subjects</h3>
-            <table className="sheet-table">
+            <table className="sheet-table subjects-table">
               <thead>
                 <tr>
                   <th>Subjects</th>
@@ -87,7 +87,7 @@ export function ResultPreview({
               <tbody>
                 {computed.subjects.map((row) => (
                   <tr key={row.id}>
-                    <td>{row.name}</td>
+                    <td className="subject-name">{row.name}</td>
                     <td>{row.test}</td>
                     <td>{row.exam}</td>
                     <td>{row.total}</td>
@@ -95,6 +95,14 @@ export function ResultPreview({
                     <td>{row.remark}</td>
                   </tr>
                 ))}
+                <tr className="spacer-row" aria-hidden="true">
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
               </tbody>
               <tfoot>
                 <tr>
@@ -134,17 +142,41 @@ export function ResultPreview({
             </table>
           </section>
 
-          <section className="summary-row">
-            <p>
-              <strong>Position In Class:</strong> {student.positionInClass}
-            </p>
-            <p>
-              <strong>Overall Grade:</strong> {computed.overallGrade}
-            </p>
-            <p>
-              <strong>Class Teacher Remark:</strong> {computed.overallRemark}
-            </p>
-            <p>
+          <section className="summary-row report-footer">
+            <div className="meta-inline">
+              <p>
+                <strong>Position In Class:</strong> {student.positionInClass}
+              </p>
+              <p>
+                <strong>Overall Grade:</strong> {computed.overallGrade}
+              </p>
+            </div>
+
+            <div className="remarks-grid">
+              <div className="remark-box">
+                <p className="remark-label">Class Teacher's Remark:</p>
+                <div className="handwriting-space"></div>
+              </div>
+              <div className="remark-box">
+                <p className="remark-label">Principal's Remark:</p>
+                <div className="handwriting-space"></div>
+              </div>
+            </div>
+
+            <div className="signatures-grid">
+              <div>
+                <p className="signature-label">
+                  Class Teacher Signature / Date
+                </p>
+                <div className="signature-line"></div>
+              </div>
+              <div>
+                <p className="signature-label">Principal Signature / Date</p>
+                <div className="signature-line"></div>
+              </div>
+            </div>
+
+            <p className="next-term-line">
               <strong>Next Term Begins:</strong> {student.nextTermBegins}
             </p>
           </section>
@@ -152,7 +184,7 @@ export function ResultPreview({
       </div>
 
       <div className="result-page back-page" ref={backPageRef}>
-        <div className="page-overlay">
+        <div className="page-overlay back-overlay">
           <h2 className="back-title">Affective And Psychomotor Records</h2>
           <table className="sheet-table ratings-table">
             <thead>
@@ -171,7 +203,7 @@ export function ResultPreview({
                   <td>{item.label}</td>
                   {[5, 4, 3, 2, 1].map((score) => (
                     <td key={`${item.id}-${score}`} className="center-cell">
-                      {ratings[item.id] === score ? "X" : ""}
+                      {ratings[item.id] === score ? "✓" : ""}
                     </td>
                   ))}
                 </tr>
