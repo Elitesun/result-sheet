@@ -1,16 +1,19 @@
-import { RESULT_TEMPLATE } from "../config/template";
+import type { ResultTemplateKey } from "../config/template";
 import type { ResultComputed } from "../utils/calculations";
-import type { StudentInfo, SubjectId } from "../types/result";
+import type { ResultTemplate, StudentInfo } from "../types/result";
 
 interface ResultFormProps {
+  templateKey: ResultTemplateKey;
+  template: ResultTemplate;
   student: StudentInfo;
-  marks: Record<SubjectId, { test: number; exam: number }>;
+  marks: Record<string, { test: number; exam: number }>;
   ratings: Record<string, number>;
   computed: ResultComputed;
   isExporting: boolean;
+  onTemplateChange: (templateKey: ResultTemplateKey) => void;
   onStudentChange: (field: keyof StudentInfo, value: string | number) => void;
   onMarkChange: (
-    subjectId: SubjectId,
+    subjectId: string,
     field: "test" | "exam",
     value: number,
   ) => void;
@@ -19,11 +22,14 @@ interface ResultFormProps {
 }
 
 export function ResultForm({
+  templateKey,
+  template,
   student,
   marks,
   ratings,
   computed,
   isExporting,
+  onTemplateChange,
   onStudentChange,
   onMarkChange,
   onRatingChange,
@@ -42,6 +48,18 @@ export function ResultForm({
       <section className="form-section">
         <h3>Student Info</h3>
         <div className="grid two-columns">
+          <label>
+            <span>School Level</span>
+            <select
+              value={templateKey}
+              onChange={(event) =>
+                onTemplateChange(event.target.value as ResultTemplateKey)
+              }
+            >
+              <option value="primary">Primary</option>
+              <option value="secondary">Secondary</option>
+            </select>
+          </label>
           <label>
             <span>Name</span>
             <input
@@ -156,7 +174,7 @@ export function ResultForm({
       </section>
 
       <section className="form-section">
-        <h3>Marks (Fixed Subjects)</h3>
+        <h3>Marks</h3>
         <div className="marks-table-wrap">
           <table className="marks-table">
             <thead>
@@ -169,7 +187,7 @@ export function ResultForm({
               </tr>
             </thead>
             <tbody>
-              {RESULT_TEMPLATE.subjects.map((subject) => {
+              {template.subjects.map((subject) => {
                 const mark = marks[subject.id];
                 const row = computed.subjects.find(
                   (item) => item.id === subject.id,
@@ -221,7 +239,7 @@ export function ResultForm({
       <section className="form-section">
         <h3>Affective & Psychomotor</h3>
         <div className="ratings-grid">
-          {RESULT_TEMPLATE.ratingItems.map((item) => (
+          {template.ratingItems.map((item) => (
             <label key={item.id} className="rating-item">
               <span>{item.label}</span>
               <select

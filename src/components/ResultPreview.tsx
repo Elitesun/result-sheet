@@ -1,13 +1,10 @@
-import {
-  gradeScaleRows,
-  gradeSummaryRows,
-  RESULT_TEMPLATE,
-} from "../config/template";
+import { gradeScaleRows, gradeSummaryRows } from "../config/template";
 import type { ResultComputed } from "../utils/calculations";
-import type { StudentInfo } from "../types/result";
+import type { ResultTemplate, StudentInfo } from "../types/result";
 import type { RefObject } from "react";
 
 interface ResultPreviewProps {
+  template: ResultTemplate;
   student: StudentInfo;
   ratings: Record<string, number>;
   computed: ResultComputed;
@@ -16,6 +13,7 @@ interface ResultPreviewProps {
 }
 
 export function ResultPreview({
+  template,
   student,
   ratings,
   computed,
@@ -40,13 +38,13 @@ export function ResultPreview({
               decoding="sync"
             />
             <div>
-              <h1>{RESULT_TEMPLATE.schoolName}</h1>
-              <p>{RESULT_TEMPLATE.schoolAddress}</p>
-              <p>{RESULT_TEMPLATE.schoolContact}</p>
-              <p className="sheet-motto">MOTTO: {RESULT_TEMPLATE.motto}</p>
+              <h1>{template.schoolName}</h1>
+              <p>{template.schoolAddress}</p>
+              <p>{template.schoolContact}</p>
+              <p className="sheet-motto">MOTTO: {template.motto}</p>
             </div>
             <p className="academic-year">
-              ACADEMIC YEAR: {RESULT_TEMPLATE.academicYear}
+              ACADEMIC YEAR: {template.academicYear}
             </p>
           </header>
 
@@ -207,7 +205,7 @@ export function ResultPreview({
               </tr>
             </thead>
             <tbody>
-              {RESULT_TEMPLATE.ratingItems.map((item) => (
+              {template.ratingItems.map((item) => (
                 <tr key={item.id}>
                   <td>{item.label}</td>
                   {[5, 4, 3, 2, 1].map((score) => (

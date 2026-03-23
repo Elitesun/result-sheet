@@ -1,64 +1,125 @@
-import type {
-  Grade,
-  ResultTemplate,
-  SubjectId,
-  SubjectMark,
-} from "../types/result";
+import type { Grade, ResultTemplate, SubjectMark } from "../types/result";
 
-export const RESULT_TEMPLATE: ResultTemplate = {
-  schoolName: "GOD IS ALIVE ACADEMY",
-  schoolAddress: "04 BP 334 Lome 04 - Togo",
-  schoolContact: "Cel: + 96 97 93 57 | Email: godisaliveacademyegaa@gmail.com",
-  academicYear: "2025 - 2026",
-  motto: "HUMILITY - WISDOM - SUCCESS",
-  subjects: [
-    { id: "mathematics", name: "Mathematics", maxTest: 30, maxExam: 70 },
-    {
-      id: "english_language",
-      name: "English Language",
-      maxTest: 30,
-      maxExam: 70,
-    },
-    { id: "basic_science", name: "Basic Science", maxTest: 30, maxExam: 70 },
-    { id: "social_studies", name: "Social Studies", maxTest: 30, maxExam: 70 },
-    { id: "home_economics", name: "Home Economics", maxTest: 30, maxExam: 70 },
-    {
-      id: "cultural_creative_art",
-      name: "Cultural & Creative Art",
-      maxTest: 30,
-      maxExam: 70,
-    },
-    {
-      id: "agricultural_science",
-      name: "Agricultural Science",
-      maxTest: 30,
-      maxExam: 70,
-    },
-    { id: "crk", name: "C.R.K", maxTest: 30, maxExam: 70 },
-    { id: "reading", name: "Reading", maxTest: 30, maxExam: 70 },
-    { id: "dictation", name: "Writing/Dictation", maxTest: 30, maxExam: 70 },
-  ],
-  ratingItems: [
-    { id: "hand_writing", label: "Hand Writing" },
-    { id: "verbal_fluency", label: "Verbal Fluency" },
-    { id: "games", label: "Games" },
-    { id: "sports", label: "Sports" },
-    { id: "handling_tools", label: "Handling Tools" },
-    { id: "drawing_and_painting", label: "Drawing and Painting" },
-    { id: "musical_skills", label: "Musical Skills" },
-    { id: "punctuality", label: "Punctuality" },
-    { id: "neatness", label: "Neatness" },
-    { id: "politeness", label: "Politeness" },
-    { id: "honesty", label: "Honesty" },
-    { id: "cooperation_with_others", label: "Co-operation With Others" },
-    { id: "leadership", label: "Leadership" },
-    { id: "helping_others", label: "Helping Others" },
-    { id: "emotional_stability", label: "Emotional Stability" },
-    { id: "attitude_to_school_work", label: "Attitude to School Work" },
-    { id: "perseverance", label: "Perseverance" },
-    { id: "attentiveness", label: "Attentiveness" },
-  ],
-};
+export const RESULT_TEMPLATES = {
+  primary: {
+    schoolName: "GOD IS ALIVE ACADEMY",
+    schoolAddress: "04 BP 334 Lome 04 - Togo",
+    schoolContact:
+      "Cel: + 96 97 93 57 | Email: godisaliveacademyegaa@gmail.com",
+    academicYear: "2025 - 2026",
+    motto: "HUMILITY - WISDOM - SUCCESS",
+    subjects: [
+      { id: "mathematics", name: "Mathematics", maxTest: 30, maxExam: 70 },
+      {
+        id: "english_language",
+        name: "English Language",
+        maxTest: 30,
+        maxExam: 70,
+      },
+      { id: "basic_science", name: "Basic Science", maxTest: 30, maxExam: 70 },
+      {
+        id: "social_studies",
+        name: "Social Studies",
+        maxTest: 30,
+        maxExam: 70,
+      },
+      {
+        id: "home_economics",
+        name: "Home Economics",
+        maxTest: 30,
+        maxExam: 70,
+      },
+      {
+        id: "cultural_creative_art",
+        name: "Cultural & Creative Art",
+        maxTest: 30,
+        maxExam: 70,
+      },
+      {
+        id: "agricultural_science",
+        name: "Agricultural Science",
+        maxTest: 30,
+        maxExam: 70,
+      },
+      { id: "crk", name: "C.R.K", maxTest: 30, maxExam: 70 },
+      { id: "reading", name: "Reading", maxTest: 30, maxExam: 70 },
+      { id: "dictation", name: "Writing/Dictation", maxTest: 30, maxExam: 70 },
+    ],
+    ratingItems: [
+      { id: "hand_writing", label: "Hand Writing" },
+      { id: "verbal_fluency", label: "Verbal Fluency" },
+      { id: "games", label: "Games" },
+      { id: "sports", label: "Sports" },
+      { id: "handling_tools", label: "Handling Tools" },
+      { id: "drawing_and_painting", label: "Drawing and Painting" },
+      { id: "musical_skills", label: "Musical Skills" },
+      { id: "punctuality", label: "Punctuality" },
+      { id: "neatness", label: "Neatness" },
+      { id: "politeness", label: "Politeness" },
+      { id: "honesty", label: "Honesty" },
+      { id: "cooperation_with_others", label: "Co-operation With Others" },
+      { id: "leadership", label: "Leadership" },
+      { id: "helping_others", label: "Helping Others" },
+      { id: "emotional_stability", label: "Emotional Stability" },
+      { id: "attitude_to_school_work", label: "Attitude to School Work" },
+      { id: "perseverance", label: "Perseverance" },
+      { id: "attentiveness", label: "Attentiveness" },
+    ],
+  },
+  secondary: {
+    schoolName: "GOD IS ALIVE ACADEMY",
+    schoolAddress: "04 BP 334 Lome 04 - Togo",
+    schoolContact:
+      "Cel: + 96 97 93 57 | Email: godisaliveacademyegaa@gmail.com",
+    academicYear: "2025 - 2026",
+    motto: "HUMILITY - WISDOM - SUCCESS",
+    subjects: [
+      { id: "mathematics", name: "Mathematics", maxTest: 30, maxExam: 70 },
+      {
+        id: "english_lang",
+        name: "English Lang",
+        maxTest: 30,
+        maxExam: 70,
+      },
+      { id: "science", name: "Science", maxTest: 30, maxExam: 70 },
+      { id: "civic_edu", name: "Civic Edu.", maxTest: 30, maxExam: 70 },
+      { id: "history", name: "History", maxTest: 30, maxExam: 70 },
+      { id: "social_std", name: "Social Std.", maxTest: 30, maxExam: 70 },
+      { id: "crk", name: "C.R.K", maxTest: 30, maxExam: 70 },
+      {
+        id: "creative_art_drw",
+        name: "Creative Art/Drw",
+        maxTest: 30,
+        maxExam: 70,
+      },
+      { id: "dictation", name: "Dictation", maxTest: 30, maxExam: 70 },
+    ],
+    ratingItems: [
+      { id: "hand_writing", label: "Hand Writing" },
+      { id: "verbal_fluency", label: "Verbal Fluency" },
+      { id: "games", label: "Games" },
+      { id: "sports", label: "Sports" },
+      { id: "handling_tools", label: "Handling Tools" },
+      { id: "drawing_and_painting", label: "Drawing and Painting" },
+      { id: "musical_skills", label: "Musical Skills" },
+      { id: "punctuality", label: "Punctuality" },
+      { id: "neatness", label: "Neatness" },
+      { id: "politeness", label: "Politeness" },
+      { id: "honesty", label: "Honesty" },
+      { id: "cooperation_with_others", label: "Co-operation With Others" },
+      { id: "leadership", label: "Leadership" },
+      { id: "helping_others", label: "Helping Others" },
+      { id: "emotional_stability", label: "Emotional Stability" },
+      { id: "attitude_to_school_work", label: "Attitude to School Work" },
+      { id: "perseverance", label: "Perseverance" },
+      { id: "attentiveness", label: "Attentiveness" },
+    ],
+  },
+} as const satisfies Record<string, ResultTemplate>;
+
+export type ResultTemplateKey = keyof typeof RESULT_TEMPLATES;
+
+export const RESULT_TEMPLATE: ResultTemplate = RESULT_TEMPLATES.primary;
 
 export const gradeLabelMap: Record<Grade, string> = {
   A: "Outstanding",
@@ -88,18 +149,22 @@ export const gradeSummaryRows = [
   { remark: "Fail", grade: "F", range: "Below 40" },
 ] as const;
 
-export function createEmptyMarks(): Record<SubjectId, SubjectMark> {
-  return RESULT_TEMPLATE.subjects.reduce(
+export function createEmptyMarks(
+  template: ResultTemplate = RESULT_TEMPLATE,
+): Record<string, SubjectMark> {
+  return template.subjects.reduce(
     (acc, subject) => {
       acc[subject.id] = { test: 0, exam: 0 };
       return acc;
     },
-    {} as Record<SubjectId, SubjectMark>,
+    {} as Record<string, SubjectMark>,
   );
 }
 
-export function createDefaultRatings(): Record<string, number> {
-  return RESULT_TEMPLATE.ratingItems.reduce(
+export function createDefaultRatings(
+  template: ResultTemplate = RESULT_TEMPLATE,
+): Record<string, number> {
+  return template.ratingItems.reduce(
     (acc, item) => {
       acc[item.id] = 3;
       return acc;

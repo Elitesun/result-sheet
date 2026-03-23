@@ -1,19 +1,7 @@
 export type Grade = "A" | "B" | "C" | "D" | "E" | "E-" | "F";
 
-export type SubjectId =
-  | "mathematics"
-  | "english_language"
-  | "basic_science"
-  | "social_studies"
-  | "home_economics"
-  | "cultural_creative_art"
-  | "agricultural_science"
-  | "crk"
-  | "reading"
-  | "dictation";
-
 export interface SubjectTemplate {
-  id: SubjectId;
+  id: string;
   name: string;
   maxTest: number;
   maxExam: number;

@@ -1,9 +1,9 @@
 import { gradeLabelMap, RESULT_TEMPLATE } from "../config/template";
-import type { Grade, SubjectId, SubjectMark } from "../types/result";
+import type { Grade, ResultTemplate, SubjectMark } from "../types/result";
 import { getGrade } from "./grading";
 
 export interface SubjectComputed {
-  id: SubjectId;
+  id: string;
   name: string;
   maxTest: number;
   maxExam: number;
@@ -28,9 +28,10 @@ export interface ResultComputed {
 }
 
 export function computeResults(
-  marks: Record<SubjectId, SubjectMark>,
+  marks: Record<string, SubjectMark>,
+  template: ResultTemplate = RESULT_TEMPLATE,
 ): ResultComputed {
-  const subjects = RESULT_TEMPLATE.subjects.map((subject) => {
+  const subjects = template.subjects.map((subject) => {
     const test = marks[subject.id]?.test ?? 0;
     const exam = marks[subject.id]?.exam ?? 0;
     const total = test + exam;
