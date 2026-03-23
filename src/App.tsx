@@ -18,6 +18,7 @@ function App() {
     schoolOpen: 55,
     present: 53,
     absent: 2,
+    numberInClass: "56",
     positionInClass: "12th",
     nextTermBegins: "01/09/25",
   });

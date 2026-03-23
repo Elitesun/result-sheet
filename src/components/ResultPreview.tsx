@@ -151,6 +151,9 @@ export function ResultPreview({
           <section className="summary-row report-footer">
             <div className="meta-inline">
               <p>
+                <strong>Number In Class:</strong> {student.numberInClass}
+              </p>
+              <p>
                 <strong>Position In Class:</strong> {student.positionInClass}
               </p>
               <p>

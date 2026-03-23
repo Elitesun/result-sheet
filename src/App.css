@@ -109,9 +109,9 @@ button:focus {
 .marks-table td,
 .sheet-table th,
 .sheet-table td {
-  border: 1px solid #cad3e2;
-  padding: 0.35rem;
-  font-size: 0.8rem;
+  border: 1.5px solid #aebad0;
+  padding: 0.45rem;
+  font-size: 0.9rem;
 }
 
 .marks-table th,
@@ -173,7 +173,7 @@ button:disabled {
 }
 
 .result-page {
-  width: min(100%, 920px);
+  width: min(100%, 980px);
   aspect-ratio: 210 / 297;
   margin-inline: auto;
   background-color: #ffffff;
@@ -220,8 +220,9 @@ button:disabled {
 }
 
 .back-overlay {
-  grid-template-rows: auto 1fr auto;
-  row-gap: 0.45rem;
+  grid-template-rows: auto auto auto;
+  align-content: center;
+  row-gap: 0.22rem;
 }
 
 .sheet-header {
@@ -273,9 +274,13 @@ button:disabled {
 .student-meta p {
   margin: 0;
   padding-block: 0.1rem;
-  font-size: 0.92rem;
+  font-size: 1.02rem;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+.student-meta strong {
+  font-weight: 800;
 }
 
 .summary-row p {
@@ -290,31 +295,36 @@ button:disabled {
 }
 
 .sheet-table {
-  font-size: 0.72rem;
+  font-size: 0.86rem;
+  border: 2px solid #4e5f7b;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 10px 22px rgba(18, 38, 63, 0.14);
 }
 
 .sheet-table th,
 .sheet-table td {
-  padding: 0.31rem 0.34rem;
-  line-height: 1.38;
+  border: 1.6px solid #667894;
+  padding: 0.44rem 0.5rem;
+  line-height: 1.45;
+  font-weight: 600;
 }
 
 .subjects-table {
-  font-size: 0.82rem;
+  font-size: 0.96rem;
 }
 
 .subjects-table th {
-  font-size: 0.86rem;
+  font-size: 1.02rem;
 }
 
 .subjects-table th,
 .subjects-table td {
-  padding-block: 0.5rem;
-  line-height: 1.5;
+  padding-block: 0.58rem;
+  line-height: 1.55;
 }
 
 .subject-name {
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.01em;
 }
@@ -415,46 +425,82 @@ button:disabled {
   text-align: center;
 }
 
-.ratings-table th,
-.ratings-table td {
-  font-size: 0.66rem;
-  padding: 0.24rem 0.26rem;
+.back-page .sheet-table {
+  font-size: 0.98rem;
+  border-width: 1.4px;
+  box-shadow: none;
+  margin-inline: auto;
+}
+
+.back-page .sheet-table th,
+.back-page .sheet-table td {
+  border-width: 1.2px;
+  padding: 0.16rem 0.2rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.back-page .sheet-table th {
+  font-weight: 800;
+}
+
+.back-page .ratings-table th,
+.back-page .ratings-table td {
+  font-size: 0.84rem;
+  padding: 0.05rem 0.08rem;
+  line-height: 0.95;
 }
 
 .ratings-table {
-  width: 95%;
+  width: 84%;
   margin-inline: auto;
+  align-self: start;
+  height: auto;
 }
 
 .ratings-table tbody td:first-child {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.01em;
+  white-space: nowrap;
+  font-size: 0.76rem;
 }
 
 .center-cell {
   text-align: center;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.12rem;
   line-height: 1;
 }
 
 .summary-blocks {
-  margin-top: 0.32rem;
+  margin-top: 0.08rem;
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 0.7rem;
 }
 
+.summary-blocks > div {
+  display: grid;
+  justify-items: center;
+}
+
 .summary-blocks h3 {
   margin: 0 0 0.3rem;
-  font-size: 0.78rem;
+  font-size: 0.92rem;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
 .compact-table th,
 .compact-table td {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
+  padding: 0.16rem 0.18rem;
+  font-weight: 700;
+}
+
+.compact-table {
+  width: 94%;
 }
 
 @media print {

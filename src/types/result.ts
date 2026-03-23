@@ -33,6 +33,7 @@ export interface StudentInfo {
   schoolOpen: number;
   present: number;
   absent: number;
+  numberInClass: string;
   positionInClass: string;
   nextTermBegins: string;
 }

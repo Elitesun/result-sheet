@@ -36,7 +36,7 @@ export const RESULT_TEMPLATE: ResultTemplate = {
     },
     { id: "crk", name: "C.R.K", maxTest: 30, maxExam: 70 },
     { id: "reading", name: "Reading", maxTest: 30, maxExam: 70 },
-    { id: "dictation", name: "Dictation", maxTest: 30, maxExam: 70 },
+    { id: "dictation", name: "Writing/Dictation", maxTest: 30, maxExam: 70 },
   ],
   ratingItems: [
     { id: "hand_writing", label: "Hand Writing" },

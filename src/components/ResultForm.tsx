@@ -85,6 +85,16 @@ export function ResultForm({
             />
           </label>
           <label>
+            <span>Number In Class</span>
+            <input
+              type="text"
+              value={student.numberInClass}
+              onChange={(event) =>
+                onStudentChange("numberInClass", event.target.value)
+              }
+            />
+          </label>
+          <label>
             <span>Position In Class</span>
             <input
               type="text"
