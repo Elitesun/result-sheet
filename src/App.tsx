@@ -59,8 +59,14 @@ function App() {
         }
 
         seeded[subject.id] = {
-          test: clampScore(existing.test, 0, subject.maxTest),
-          exam: clampScore(existing.exam, 0, subject.maxExam),
+          test:
+            typeof existing.test === "number"
+              ? clampScore(existing.test, 0, subject.maxTest)
+              : null,
+          exam:
+            typeof existing.exam === "number"
+              ? clampScore(existing.exam, 0, subject.maxExam)
+              : null,
         };
       });
 
@@ -91,10 +97,10 @@ function App() {
   function handleMarkChange(
     subjectId: string,
     field: "test" | "exam",
-    value: number,
+    value: number | null,
   ): void {
     setMarks((prev) => {
-      const subject = prev[subjectId] ?? { test: 0, exam: 0 };
+      const subject = prev[subjectId] ?? { test: null, exam: null };
       const templateSubject = activeTemplate.subjects.find(
         (item) => item.id === subjectId,
       );
@@ -107,7 +113,7 @@ function App() {
         ...prev,
         [subjectId]: {
           ...subject,
-          [field]: clampScore(value, 0, max),
+          [field]: typeof value === "number" ? clampScore(value, 0, max) : null,
         },
       };
     });

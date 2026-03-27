@@ -6,7 +6,7 @@ interface ResultFormProps {
   templateKey: ResultTemplateKey;
   template: ResultTemplate;
   student: StudentInfo;
-  marks: Record<string, { test: number; exam: number }>;
+  marks: Record<string, { test: number | null; exam: number | null }>;
   ratings: Record<string, number>;
   computed: ResultComputed;
   isExporting: boolean;
@@ -15,7 +15,7 @@ interface ResultFormProps {
   onMarkChange: (
     subjectId: string,
     field: "test" | "exam",
-    value: number,
+    value: number | null,
   ) => void;
   onRatingChange: (itemId: string, value: number) => void;
   onExport: () => Promise<void>;
@@ -37,6 +37,8 @@ export function ResultForm({
 }: ResultFormProps) {
   const attendanceMismatch =
     student.present + student.absent !== student.schoolOpen;
+  const maxTestMark = template.subjects[0]?.maxTest ?? 0;
+  const maxExamMark = template.subjects[0]?.maxExam ?? 0;
 
   return (
     <aside className="panel form-panel" aria-label="Result form">
@@ -180,8 +182,8 @@ export function ResultForm({
             <thead>
               <tr>
                 <th>Subject</th>
-                <th>Test /30</th>
-                <th>Exam /70</th>
+                <th>Test /{maxTestMark}</th>
+                <th>Exam /{maxExamMark}</th>
                 <th>Total</th>
                 <th>Grade</th>
               </tr>
@@ -201,14 +203,15 @@ export function ResultForm({
                         type="number"
                         min={0}
                         max={subject.maxTest}
-                        value={mark.test}
-                        onChange={(event) =>
+                        value={mark.test ?? ""}
+                        onChange={(event) => {
+                          const value = event.target.value;
                           onMarkChange(
                             subject.id,
                             "test",
-                            Number(event.target.value),
-                          )
-                        }
+                            value === "" ? null : Number(value),
+                          );
+                        }}
                       />
                     </td>
                     <td>
@@ -216,14 +219,15 @@ export function ResultForm({
                         type="number"
                         min={0}
                         max={subject.maxExam}
-                        value={mark.exam}
-                        onChange={(event) =>
+                        value={mark.exam ?? ""}
+                        onChange={(event) => {
+                          const value = event.target.value;
                           onMarkChange(
                             subject.id,
                             "exam",
-                            Number(event.target.value),
-                          )
-                        }
+                            value === "" ? null : Number(value),
+                          );
+                        }}
                       />
                     </td>
                     <td>{row?.total ?? 0}</td>

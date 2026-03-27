@@ -162,11 +162,15 @@ export function ResultPreview({
             <div className="remarks-grid">
               <div className="remark-box">
                 <p className="remark-label">Class Teacher's Remark:</p>
-                <div className="handwriting-space"></div>
+                <div className="handwriting-space">
+                  {computed.classTeacherRemark}
+                </div>
               </div>
               <div className="remark-box">
                 <p className="remark-label">Principal's Remark:</p>
-                <div className="handwriting-space"></div>
+                <div className="handwriting-space">
+                  {computed.principalRemark}
+                </div>
               </div>
             </div>
 

@@ -8,8 +8,8 @@ export interface SubjectTemplate {
 }
 
 export interface SubjectMark {
-  test: number;
-  exam: number;
+  test: number | null;
+  exam: number | null;
 }
 
 export interface StudentInfo {

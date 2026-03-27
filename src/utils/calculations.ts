@@ -1,4 +1,8 @@
-import { gradeLabelMap, RESULT_TEMPLATE } from "../config/template";
+import {
+  gradeLabelMap,
+  gradeRemarksMap,
+  RESULT_TEMPLATE,
+} from "../config/template";
 import type { Grade, ResultTemplate, SubjectMark } from "../types/result";
 import { getGrade } from "./grading";
 
@@ -25,6 +29,8 @@ export interface ResultComputed {
   percentage: number;
   overallGrade: Grade;
   overallRemark: string;
+  classTeacherRemark: string;
+  principalRemark: string;
 }
 
 export function computeResults(
@@ -32,8 +38,10 @@ export function computeResults(
   template: ResultTemplate = RESULT_TEMPLATE,
 ): ResultComputed {
   const subjects = template.subjects.map((subject) => {
-    const test = marks[subject.id]?.test ?? 0;
-    const exam = marks[subject.id]?.exam ?? 0;
+    const rawTest = marks[subject.id]?.test;
+    const rawExam = marks[subject.id]?.exam;
+    const test = typeof rawTest === "number" ? rawTest : 0;
+    const exam = typeof rawExam === "number" ? rawExam : 0;
     const total = test + exam;
     const grade = getGrade(total);
 
@@ -73,6 +81,8 @@ export function computeResults(
     totalObtainable,
     percentage: roundedPercentage,
     overallGrade,
-    overallRemark: gradeLabelMap[overallGrade],
+    overallRemark: gradeRemarksMap[overallGrade].overall,
+    classTeacherRemark: gradeRemarksMap[overallGrade].teacher,
+    principalRemark: gradeRemarksMap[overallGrade].principal,
   };
 }

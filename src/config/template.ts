@@ -1,5 +1,11 @@
 import type { Grade, ResultTemplate, SubjectMark } from "../types/result";
 
+export interface GradeRemarks {
+  overall: string;
+  teacher: string;
+  principal: string;
+}
+
 export const RESULT_TEMPLATES = {
   primary: {
     schoolName: "GOD IS ALIVE ACADEMY",
@@ -74,25 +80,25 @@ export const RESULT_TEMPLATES = {
     academicYear: "2025 - 2026",
     motto: "HUMILITY - WISDOM - SUCCESS",
     subjects: [
-      { id: "mathematics", name: "Mathematics", maxTest: 30, maxExam: 70 },
+      { id: "mathematics", name: "Mathematics", maxTest: 40, maxExam: 60 },
       {
         id: "english_lang",
         name: "English Lang",
-        maxTest: 30,
-        maxExam: 70,
+        maxTest: 40,
+        maxExam: 60,
       },
-      { id: "science", name: "Science", maxTest: 30, maxExam: 70 },
-      { id: "civic_edu", name: "Civic Edu.", maxTest: 30, maxExam: 70 },
-      { id: "history", name: "History", maxTest: 30, maxExam: 70 },
-      { id: "social_std", name: "Social Std.", maxTest: 30, maxExam: 70 },
-      { id: "crk", name: "C.R.K", maxTest: 30, maxExam: 70 },
+      { id: "science", name: "Science", maxTest: 40, maxExam: 60 },
+      { id: "civic_edu", name: "Civic Edu.", maxTest: 40, maxExam: 60 },
+      { id: "history", name: "History", maxTest: 40, maxExam: 60 },
+      { id: "social_std", name: "Social Std.", maxTest: 40, maxExam: 60 },
+      { id: "crk", name: "C.R.K", maxTest: 40, maxExam: 60 },
       {
         id: "creative_art_drw",
         name: "Creative Art/Drw",
-        maxTest: 30,
-        maxExam: 70,
+        maxTest: 40,
+        maxExam: 60,
       },
-      { id: "dictation", name: "Dictation", maxTest: 30, maxExam: 70 },
+      { id: "dictation", name: "Dictation", maxTest: 40, maxExam: 60 },
     ],
     ratingItems: [
       { id: "hand_writing", label: "Hand Writing" },
@@ -131,6 +137,44 @@ export const gradeLabelMap: Record<Grade, string> = {
   F: "Fail",
 };
 
+export const gradeRemarksMap: Record<Grade, GradeRemarks> = {
+  A: {
+    overall: "Outstanding",
+    teacher: "Excellent performance. Keep it up.",
+    principal: "Outstanding result. Maintain this standard.",
+  },
+  B: {
+    overall: "Excellent",
+    teacher: "Very good performance. Keep improving.",
+    principal: "Excellent result. Aim higher.",
+  },
+  C: {
+    overall: "Very Good",
+    teacher: "Good performance. More effort needed.",
+    principal: "Very good result. Can do better.",
+  },
+  D: {
+    overall: "Good",
+    teacher: "Fair performance. Needs more effort.",
+    principal: "Good result. Strive to improve.",
+  },
+  E: {
+    overall: "Average",
+    teacher: "Average performance. Work harder.",
+    principal: "Fair result. Improvement needed.",
+  },
+  "E-": {
+    overall: "Pass",
+    teacher: "Weak performance. Must improve.",
+    principal: "Below expectation. Work harder.",
+  },
+  F: {
+    overall: "Fail",
+    teacher: "Poor performance. Serious effort needed.",
+    principal: "Unsatisfactory result. Improve urgently.",
+  },
+};
+
 export const gradeScaleRows = [
   { grade: "5", label: "Excellence" },
   { grade: "4", label: "Very Good" },
@@ -154,7 +198,7 @@ export function createEmptyMarks(
 ): Record<string, SubjectMark> {
   return template.subjects.reduce(
     (acc, subject) => {
-      acc[subject.id] = { test: 0, exam: 0 };
+      acc[subject.id] = { test: null, exam: null };
       return acc;
     },
     {} as Record<string, SubjectMark>,
