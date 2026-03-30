@@ -380,11 +380,13 @@ button:disabled {
 .meta-inline p {
   margin: 0;
   padding-block: 0.06rem;
-  font-size: 0.82rem;
+  font-size: 1.02rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .meta-inline strong {
+  font-weight: 800;
   letter-spacing: 0.02em;
 }
 
@@ -401,8 +403,8 @@ button:disabled {
 
 .remark-label {
   margin: 0;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 1.02rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -420,8 +422,8 @@ button:disabled {
 
 .signature-label {
   margin: 0 0 0.28rem;
-  font-size: 0.76rem;
-  font-weight: 600;
+  font-size: 1.02rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -434,11 +436,13 @@ button:disabled {
 
 .next-term-line {
   margin: 0.2rem 0 0;
-  font-size: 0.84rem;
+  font-size: 1.02rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .next-term-line strong {
+  font-weight: 800;
   letter-spacing: 0.02em;
 }
 
