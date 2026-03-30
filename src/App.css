@@ -193,10 +193,21 @@ button:disabled {
     url("/result-back.jpeg");
 }
 
-/* Use template photos for live preview only; hide them during PDF capture. */
-.pdf-export-mode .front-page,
-.pdf-export-mode .back-page {
-  background-image: none;
+.pdf-capture-root {
+  position: fixed;
+  left: -100000px;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pdf-capture-root .result-page-export {
+  width: 210mm;
+  height: 297mm;
+  aspect-ratio: auto;
+  margin: 0;
 }
 
 .pdf-export-mode .academic-year {
@@ -240,7 +251,7 @@ button:disabled {
 
 .sheet-header h1 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   letter-spacing: 0.02em;
   text-align: center;
 }
@@ -248,7 +259,7 @@ button:disabled {
 .sheet-header p {
   margin: 0;
   text-align: center;
-  font-size: 0.68rem;
+  font-size: 0.8rem;
 }
 
 .sheet-motto {
@@ -296,14 +307,14 @@ button:disabled {
 
 .sheet-table {
   font-size: 0.86rem;
-  border: 2px solid #4e5f7b;
+  border: 2px solid #1d2735;
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 10px 22px rgba(18, 38, 63, 0.14);
 }
 
 .sheet-table th,
 .sheet-table td {
-  border: 1.6px solid #667894;
+  border: 1.6px solid #2a3547;
   padding: 0.44rem 0.5rem;
   line-height: 1.45;
   font-weight: 600;
@@ -327,7 +338,7 @@ button:disabled {
 
 .front-page .subjects-table th,
 .front-page .subjects-table td {
-  border: 3px solid #667894;
+  border: 3px solid #000000;
   padding-block: 0.7rem;
   line-height: 1.38;
   font-weight: 700;
@@ -443,6 +454,7 @@ button:disabled {
   font-size: 0.98rem;
   text-align: center;
   border-width: 2px;
+  border-color: #000000;
   box-shadow: none;
   margin-inline: auto;
 }
@@ -454,6 +466,7 @@ button:disabled {
 .back-page .sheet-table th,
 .back-page .sheet-table td {
   border-width: 3px;
+  border-color: #000000;
   padding: 0.7rem 0.5rem;
   line-height: 0.5;
   font-weight: 700;
@@ -464,6 +477,7 @@ button:disabled {
 .back-page .ratings-table th,
 .back-page .ratings-table td {
   font-size: 0.99rem;
+  border-color: #000000;
   padding: 0.7rem 0.5rem;
   line-height: 1;
   font-weight: 700;
@@ -471,6 +485,7 @@ button:disabled {
 
 .ratings-table {
   width: 84%;
+  border: 2px solid #000000;
   margin-inline: auto;
   align-self: start;
   height: auto;
@@ -563,40 +578,40 @@ button:disabled {
 }
 
 @media (max-width: 1240px) {
-  .app-shell {
+  html:not(.pdf-export-mode) .app-shell {
     grid-template-columns: 1fr;
   }
 
-  .form-panel {
+  html:not(.pdf-export-mode) .form-panel {
     position: static;
     max-height: none;
   }
 
-  .result-page {
+  html:not(.pdf-export-mode) .result-page {
     width: 100%;
   }
 }
 
 @media (max-width: 740px) {
-  .two-columns,
-  .ratings-grid,
-  .student-meta,
-  .meta-inline,
-  .remarks-grid,
-  .signatures-grid,
-  .summary-blocks {
+  html:not(.pdf-export-mode) .two-columns,
+  html:not(.pdf-export-mode) .ratings-grid,
+  html:not(.pdf-export-mode) .student-meta,
+  html:not(.pdf-export-mode) .meta-inline,
+  html:not(.pdf-export-mode) .remarks-grid,
+  html:not(.pdf-export-mode) .signatures-grid,
+  html:not(.pdf-export-mode) .summary-blocks {
     grid-template-columns: 1fr;
   }
 
-  .sheet-header {
+  html:not(.pdf-export-mode) .sheet-header {
     grid-template-columns: auto 1fr;
   }
 
-  .academic-year {
+  html:not(.pdf-export-mode) .academic-year {
     writing-mode: horizontal-tb;
   }
 
-  .sheet-header h1 {
+  html:not(.pdf-export-mode) .sheet-header h1 {
     font-size: 0.85rem;
   }
 }
