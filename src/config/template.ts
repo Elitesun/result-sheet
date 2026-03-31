@@ -87,6 +87,7 @@ export const RESULT_TEMPLATES = {
         maxTest: 40,
         maxExam: 60,
       },
+      { id: "literature", name: "Literature", maxTest: 40, maxExam: 60 },
       { id: "science", name: "Science", maxTest: 40, maxExam: 60 },
       { id: "civic_edu", name: "Civic Edu.", maxTest: 40, maxExam: 60 },
       { id: "history", name: "History", maxTest: 40, maxExam: 60 },
